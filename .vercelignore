@@ -1,0 +1,9 @@
+*.xlsx
+*.db
+secret.key
+.env
+artifact_showcases.html
+__pycache__/
+.claude/
+start.bat
+requirements-local.txt

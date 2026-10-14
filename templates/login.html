@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вход — Lead CRM</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body class="login-page">
+  <form class="login-box" method="post">
+    <div class="login-logo"><span class="logo-mark">L</span> Lead CRM</div>
+    {% if setup_blocked %}
+      <h2>CRM ещё не настроена</h2>
+      <p class="muted">Администратор создаётся в локальной версии: запустите <b>python app.py</b> на компьютере
+        с тем же DATABASE_URL в файле .env и создайте учётную запись. После этого вход заработает и здесь.</p>
+    {% else %}
+      {% if setup %}
+        <h2>Первый запуск</h2>
+        <p class="muted">Создайте учётную запись администратора. Потом в «Настройках» добавите менеджеров.</p>
+        <label>Ваше имя<input name="name" required autofocus></label>
+      {% else %}
+        <h2>Вход</h2>
+      {% endif %}
+      <label>Логин<input name="login" required {% if not setup %}autofocus{% endif %} autocomplete="username"></label>
+      <label>Пароль<input name="password" type="password" required minlength="6" autocomplete="{{ 'new-password' if setup else 'current-password' }}"></label>
+      {% if error %}<div class="form-err">{{ error }}</div>{% endif %}
+      <button class="btn btn-primary btn-wide">{{ 'Создать и войти' if setup else 'Войти' }}</button>
+    {% endif %}
+  </form>
+</body>
+</html>
