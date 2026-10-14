@@ -7,3 +7,7 @@ __pycache__/
 .claude/
 start.bat
 requirements-local.txt
+.env*
+!.env.example
+.agents/
+skills-lock.json
